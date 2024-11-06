@@ -1,7 +1,7 @@
 package db
 
 import (
-	dbhelper "github.com/baisiyi/gorm_helper/db_helper"
+	dbhelper "github.com/baisiyi/gorm_helper/mysql/db_helper"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
