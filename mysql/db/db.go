@@ -29,10 +29,10 @@ var DBMap = make(map[string]*gorm.DB)
 func newDb(dsn string) (db *gorm.DB, err error) {
 	db, ok := DBMap[name]
 	if !ok {
-	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	if err != nil {
-		return
-	}
+		db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+		if err != nil {
+			return
+		}
 		DBMap[name] = db
 	}
 	return db, nil
