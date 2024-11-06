@@ -6,10 +6,6 @@ import (
 	"gorm.io/gorm"
 )
 
-var DBConfigMap = map[string]string{
-	"": "user:pass@tcp(127.0.0.1:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local",
-}
-
 type Option func(db *gorm.DB) *gorm.DB
 
 func GetDbHelper(name string, opts ...Option) *dbhelper.DbHelper {
@@ -27,13 +23,13 @@ func GetDbHelper(name string, opts ...Option) *dbhelper.DbHelper {
 var DBMap = make(map[string]*gorm.DB)
 
 func newDb(dsn string) (db *gorm.DB, err error) {
-	db, ok := DBMap[name]
+	db, ok := DBMap[dsn]
 	if !ok {
 		db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 		if err != nil {
 			return
 		}
-		DBMap[name] = db
+		DBMap[dsn] = db
 	}
 	return db, nil
 }
